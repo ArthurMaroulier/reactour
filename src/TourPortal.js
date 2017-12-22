@@ -355,7 +355,7 @@ Please check the \`steps\` Tour prop Array at position: ${current + 1}.`)
 
     if (isOpen) {
       return (
-        <div>
+        <div className="c-reactour">
           <div
             ref={c => (this.mask = c)}
             onClick={this.maskClickHandler}
@@ -418,7 +418,7 @@ Please check the \`steps\` Tour prop Array at position: ${current + 1}.`)
             tabIndex={-1}
             current={current}
             style={steps[current].style ? steps[current].style : {}}
-            className={cn(CN.helper.base, className, {
+            className={cn("c-reactour__container", CN.helper.base, className, {
               [CN.helper.isOpen]: isOpen,
             })}>
             {steps[current] &&
@@ -430,7 +430,7 @@ Please check the \`steps\` Tour prop Array at position: ${current + 1}.`)
                   })
                 : steps[current].content)}
             {showNumber && (
-              <Badge>
+              <Badge className="c-reactour__badge">
                 {typeof badgeContent === 'function' ? (
                   badgeContent(current + 1, steps.length)
                 ) : (
@@ -438,17 +438,18 @@ Please check the \`steps\` Tour prop Array at position: ${current + 1}.`)
                 )}
               </Badge>
             )}
-            <Controls>
+            <Controls className="c-reactour__controls">
               {showButtons && (
                 <Arrow
                   onClick={this.prevStep}
                   disabled={current === 0}
                   label={prevButton ? prevButton : null}
+                  className={cn("c-reactour__arrow", {"c-reactour__arrow--disabled": current === 0})}
                 />
               )}
 
               {showNavigation && (
-                <Navigation>
+                <Navigation className="c-reactour__navigation">
                   {steps.map((s, i) => (
                     <Dot
                       key={`${s.selector}_${i}`}
@@ -457,6 +458,7 @@ Please check the \`steps\` Tour prop Array at position: ${current + 1}.`)
                       index={i}
                       disabled={current === i}
                       showNumber={showNavigationNumber}
+                      className={cn("c-reactour__dot", {"c-reactour__dot--current": current === i})}
                     />
                   ))}
                 </Navigation>
@@ -482,11 +484,12 @@ Please check the \`steps\` Tour prop Array at position: ${current + 1}.`)
                       nextButton
                     ) : null
                   }
+                  className={cn("c-reactour__arrow", {"c-reactour__arrow--disabled": !lastStepNextButton && current === steps.length - 1})}
                 />
               )}
             </Controls>
 
-            <Close onClick={onRequestClose} />
+            <Close onClick={onRequestClose} className="c-reactour__close" />
           </Guide>
         </div>
       )
