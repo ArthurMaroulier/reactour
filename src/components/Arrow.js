@@ -10,7 +10,7 @@ const Label = styled.span`
 const Arrow = ({ className, onClick, disabled, inverted, label }) =>
   <SvgButton className={className} onClick={onClick}>
     {label
-      ? <Label>
+      ? <Label className="c-reactour__arrow--label">
           {label}
         </Label>
       : <svg viewBox="0 0 18.4 14.4">
